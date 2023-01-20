@@ -41,6 +41,7 @@ public class Main_Product {
         }
 
         // change price by %
+        //jjjk
 
 
         //statisticPrice(ArrayList<Product> goods, String function)

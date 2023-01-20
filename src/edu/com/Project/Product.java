@@ -140,6 +140,7 @@ public class Product {
  //       return newGoods;
  //   }
 
+
     public double statisticPrice (ArrayList<Product> goods, String function) {
         DoubleSummaryStatistics stats = goods.stream()
                 .mapToDouble(Product::getPrice).summaryStatistics();
