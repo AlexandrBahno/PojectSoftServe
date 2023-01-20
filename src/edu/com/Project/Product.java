@@ -144,7 +144,6 @@ public class Product {
     public double statisticPrice (ArrayList<Product> goods, String function) {
         DoubleSummaryStatistics stats = goods.stream()
                 .mapToDouble(Product::getPrice).summaryStatistics();
-        try{
         switch (function) {
             case "Max":
                 return stats.getMax();
@@ -154,9 +153,6 @@ public class Product {
                 return stats.getAverage();
             default:
                 System.out.println("Error name function");
-        }
-        } catch (IllegalAccessError e) {
-            System.out.println("Error");
         }
         return -1;
     }
