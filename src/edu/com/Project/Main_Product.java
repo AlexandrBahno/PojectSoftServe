@@ -36,11 +36,19 @@ public class Main_Product {
         System.out.println("\nGoods in stock:");
         Set<Map.Entry<String, Integer>> set = product.nameQuantity(goods).entrySet();
         for (Map.Entry<String, Integer> me : set) {
-            System.out.printf("%-75s%s",me.getKey(), ": ");
+            System.out.printf("%-75s%s", me.getKey(), ": ");
             System.out.println(me.getValue());
         }
 
         // change price by %
+
+
+        //statisticPrice(ArrayList<Product> goods, String function)
+        System.out.print("\nStatistic price:");
+        System.out.printf("%-16s%.2f", "\nMax price: ", product.statisticPrice(goods, "Max"));
+        System.out.printf("%-16s%.2f", "\nMix price: ", product.statisticPrice(goods, "Min"));
+        System.out.printf("%-16s%.2f", "\nAverage price: ", product.statisticPrice(goods, "Average"));
+
 
     }
 }

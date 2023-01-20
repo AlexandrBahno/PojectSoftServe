@@ -1,8 +1,6 @@
 package edu.com.Project;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -136,10 +134,30 @@ public class Product {
         return nameQuantity;
     }
 
-    public ArrayList<Product> changePrice(ArrayList<Product> goods, double n) {  // change price by %
-        ArrayList<Product> newGoods = goods.stream()
-                .map(product -> product.setPrice(product.getPrice() * n));
-        return newGoods;
+ //   public ArrayList<Product> changePrice(ArrayList<Product> goods, double n) {  // change price by %
+ //       ArrayList<Product> newGoods = goods.stream()
+
+ //       return newGoods;
+ //   }
+
+    public double statisticPrice (ArrayList<Product> goods, String function) {
+        DoubleSummaryStatistics stats = goods.stream()
+                .mapToDouble(Product::getPrice).summaryStatistics();
+        try{
+        switch (function) {
+            case "Max":
+                return stats.getMax();
+            case "Min":
+                return stats.getMin();
+            case "Average":
+                return stats.getAverage();
+            default:
+                System.out.println("Error name function");
+        }
+        } catch (IllegalAccessError e) {
+            System.out.println("Error");
+        }
+        return -1;
     }
 
 }
