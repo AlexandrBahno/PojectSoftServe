@@ -2,7 +2,7 @@ package edu.com.project.tic_tac_toe;
 
 import java.util.Scanner;
 
-public class TikTok {
+public class TicTacToe {
 
     private int stroka;
     private int stolbec;
