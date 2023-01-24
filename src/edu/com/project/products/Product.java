@@ -1,4 +1,4 @@
-package edu.com.Project;
+package edu.com.project.products;
 
 import java.util.*;
 
@@ -134,14 +134,15 @@ public class Product {
         return nameQuantity;
     }
 
- //   public ArrayList<Product> changePrice(ArrayList<Product> goods, double n) {  // change price by %
- //       ArrayList<Product> newGoods = goods.stream()
+    // change price by %
+    public void changePrice(ArrayList<Product> goods, double n) {  // change price by %
+        for (Product products : goods) {
+            products.setPrice(products.getPrice() * n);
+        }
+    }
 
- //       return newGoods;
- //   }
 
-
-    public double statisticPrice (ArrayList<Product> goods, String function) {
+    public double statisticPrice(ArrayList<Product> goods, String function) {
         DoubleSummaryStatistics stats = goods.stream()
                 .mapToDouble(Product::getPrice).summaryStatistics();
         switch (function) {
@@ -153,8 +154,40 @@ public class Product {
                 return stats.getAverage();
             default:
                 System.out.println("Error name function");
+                return -1;
         }
-        return -1;
     }
 
+    public class NameComparator implements Comparator<Product> {
+        @Override
+        public int compare(Product o1, Product o2) {
+            return o1.name.compareTo(o2.name);
+        }
+    }
+
+    public class QtyComparator implements Comparator<Product> {
+        @Override
+        public int compare(Product o1, Product o2) {
+            return o1.quantityOfGoods - o2.quantityOfGoods;
+        }
+    }
+
+    public void sortList(ArrayList<Product> goods, String bySort) {
+        switch (bySort) {
+            case "name":
+                goods.sort(new NameComparator());
+                for (Product product : goods) {
+                    System.out.print(product);
+                }
+                break;
+            case "quantityOfGoods":
+                goods.sort(new QtyComparator());
+                for (Product product : goods) {
+                    System.out.print(product);
+                }
+                break;
+            default:
+                System.out.println("Error name bySort");
+        }
+    }
 }

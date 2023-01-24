@@ -1,12 +1,12 @@
-package edu.com.Project;
+package edu.com.project.products;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class Main_Product {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ArrayList<Product> goods = new ArrayList<>();
         goods.add(new Product(1, "Стул Ізо чорний А-01", 26, 3249.5, "AMF", "Офісніе стільці", 530, 560, 860));
         goods.add(new Product(2, "Стілець Аскона чорний шкірзам чорний", 42, 4249.3, "AMF", "Офісніе стільці", 530, 560, 860));
@@ -41,7 +41,9 @@ public class Main_Product {
         }
 
         // change price by %
-        //jjjk
+        System.out.print("\nChange price by 1.2:");
+        product.changePrice(goods, 1.2);
+        System.out.println(goods);
 
 
         //statisticPrice(ArrayList<Product> goods, String function)
@@ -50,7 +52,25 @@ public class Main_Product {
         System.out.printf("%-16s%.2f", "\nMix price: ", product.statisticPrice(goods, "Min"));
         System.out.printf("%-16s%.2f", "\nAverage price: ", product.statisticPrice(goods, "Average"));
 
+        // sort for Comparator
+        System.out.print("\n\nSort by name:");
+        product.sortList(goods, "name");
 
+        System.out.print("\n\nSort by quantityOfGoods:");
+        product.sortList(goods, "quantityOfGoods");
+
+        // sort for Stream
+        System.out.print("\n\nSort by price:");
+        goods.stream().sorted(Comparator.comparingDouble(Product::getPrice)).forEach(System.out::print);
+
+        String fileName = "myProduct.txt";
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+            System.out.println("Write data to file: " + fileName);
+            bw.write(String.valueOf(goods));
+
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
 
